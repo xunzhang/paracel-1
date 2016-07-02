@@ -69,6 +69,7 @@ script:
   - cd /tmp
   - python $TRAVIS_BUILD_DIR/tool/datagen.py -m wc -o data.txt
   - wget "paracel.io/data/travis_demo.json"
+  - cat travis_demo.json
   - export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/paracel/lib
   - /opt/paracel/prun.py -p 2 -w 2 -c travis_demo.json -m local /opt/paracel/bin/wc
 
