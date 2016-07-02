@@ -56,7 +56,7 @@ install:
 before_script:
   - cd $TRAVIS_BUILD_DIR
   - mkdir build
-  - mkdir -p "/opt/paracel"
+  - sudo mkdir -p "/opt/paracel"
   - cd build
   - cmake -DCMAKE_INSTALL_PREFIX=/opt/paracel ..
 
@@ -65,7 +65,7 @@ after_failure: "cat /home/travis/build/douban/paracel/build/CMakeFiles/CMakeErro
 script:
   - make -j$(nproc)
   - make test
-  - make install
+  - sudo make install
   - cd /tmp
   - python /opt/paracel/tool/datagen.py -m wc -o data.txt
   - wget "paracel.io/data/travis_demo.json"
