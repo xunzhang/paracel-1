@@ -67,7 +67,7 @@ script:
   - make test
   - sudo make install
   - cd /tmp
-  - wget "paracel.io/data/kjv12.txt"
+  - wget "paracel.io/data/kjv12.txt" -O "data.txt"
   - wget "paracel.io/data/travis_demo.json"
   - cat travis_demo.json
   - ls /opt/paracel/prun.py
