@@ -61,7 +61,9 @@ before_script:
   - cd build
   - cmake -DCMAKE_INSTALL_PREFIX=/opt/paracel ..
 
-after_failure: "cat /home/travis/build/douban/paracel/build/CMakeFiles/CMakeError.log"
+after_failure:
+  - "cat /home/travis/build/xunzhang/paracel-1/build/CMakeFiles/CMakeError.log"
+  - "cat /home/travis/build/douban/paracel/build/CMakeFiles/CMakeError.log"
 
 script:
   - make -j$(nproc)
