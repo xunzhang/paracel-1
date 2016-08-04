@@ -4,6 +4,7 @@ dist: trusty
 
 env:
   global:
+    #- secure: "ae+tdrAhjVLzsGvM1D0FeLttN94m8W61tOqbFuzvIpY/Uo63zFUy18ewn7s0pTVunGWFyGnyfW6S6drN18OUtWhCEp0dLutCfBD8padt2cmhWKl9ilRn+XfjOHiKdqxx8rwi7PX5J2XPOMX5VDxBlXV43whtwgQC5pEBl3+aNIk="
     - secure: "QmSqEUL8QWA1mc6nHQ/DDWIyZ/yTMY69FDFsCnOAKw8Jrau7C8E1QI2eAlGM7vWNh/8SW6uyqGn06l8L/9C3MHaXmrMEYA/lJlnAOH4Zg/cIYSNjgFwg2H4uskAqR/jpsNI/YHeEM+Ar/wiggXLn2Ql6uVZfobZWPBAdI8o62CY3XojaIHvVpA+5l5lQsa+vPXY77xMGl6ms7tCKlVaMfxUyi46x/UCGg2USbLV259wb5sNkPsw8T6wGmfpNTACJmROqOqWUMXZCNXaNIiQ5q2XZTqLJQYRTxWbS8zoP0rfOuBjaA4kmzYZFVZg007rGzOg6r/kT2dtXbkjSmkjixeP4de1oz/VM01eJBQKd/JWnCwOhUKJHt0C0yYAh5fo+Y99ZpS8CtSZIYGSJ/+S/Ub1w1UaJQ/vq3exXi1p5zPXyxM5IbpDRSPZgYOSZZRmz13VPBJ7gaSWfnKyEwIRGxs8VVkvh2BlE7KM/F/aFRRFgVxdfQQZxi/pICU9pkX2FTqTdl3+fKudaTy62YScZfdfmehn07aUp9A3qBgOAE36+3INNMNOgpqhXyczlCk4HyI6IntzpuX0421X5FJMfs7oTRxMBpZbJPE84SUhcG3WWErUwz8PqlwX9yJTD+nWatG6xNJ9bpmflyuEZkm+emgayyI1Vk3GS/xsJzK2p2no="
     - CXX=g++-4.8 CC=gcc-4.8 EIGEN_VERSION=3.1.0 EIGEN_HASH=ca142d0540d3 MSGPACK_C_VERSION="1.4.2"
 
@@ -56,10 +57,17 @@ after_failure:
   - "cat /home/travis/build/douban/paracel/build/CMakeFiles/CMakeError.log"
 
 script:
+  #- wget https://scan.coverity.com/download/linux64 --post-data "token=Igp_zlddSe0WOmJrNmZ-mg&project=douban%2Fparacel" -O coverity_tool.tgz
   - wget https://scan.coverity.com/download/linux64 --post-data "token=6DewHnqeZ2CS7eHXccwf5A&project=xunzhang%2Fparacel-1" -O coverity_tool.tgz
   - tar zxvf coverity_tool.tgz
   - $PWD/cov-analysis-linux64-*/bin/cov-build --dir cov-int make -j$(nproc)
   - tar czvf cov.tgz cov-int
+  #- curl --form token=Igp_zlddSe0WOmJrNmZ-mg \
+  #      --form email=xunzhangthu@gmail.com \
+  #      --form file=@cov.tgz \
+  #      --form version="Version" \
+  #      --form description="Description" \
+  #      https://scan.coverity.com/builds?project=douban%2Fparacel
   - curl --form token=6DewHnqeZ2CS7eHXccwf5A \
          --form email=xunzhangthu@gmail.com \
          --form file=@cov.tgz \
