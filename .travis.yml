@@ -68,9 +68,4 @@ script:
   #      --form version="Version" \
   #      --form description="Description" \
   #      https://scan.coverity.com/builds?project=douban%2Fparacel
-  - curl --form token=6DewHnqeZ2CS7eHXccwf5A \
-         --form email=xunzhangthu@gmail.com \
-         --form file=@cov.tgz \
-         --form version="Version" \
-         --form description="Description" \
-         https://scan.coverity.com/builds?project=xunzhang%2Fparacel-1
+  - "curl --form token=6DewHnqeZ2CS7eHXccwf5A --form email=xunzhangthu@gmail.com --form file=@cov.tgz --form version=Version --form description=Description https://scan.coverity.com/builds?project=xunzhang%2Fparacel-1"
