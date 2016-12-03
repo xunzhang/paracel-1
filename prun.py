@@ -26,6 +26,7 @@ import sys
 import socket
 import random
 import subprocess
+import platform
 
 import logging
 logging.basicConfig(filename='paracelrun_log', format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
@@ -156,7 +157,8 @@ if __name__ == '__main__':
     #initport = get_free_port()
     initport = 11777
 
-    start_parasrv_cmd_lst = [server_starter, str(nsrv), os.path.join(PARACEL_INSTALL_PREFIX, 'bin/start_server --start_host'), socket.gethostname(), ' --init_port', str(initport)]
+    hostname = socket.gethostname() + '.local' if platform.system() == 'Darwin' else socket.gethostname()
+    start_parasrv_cmd_lst = [server_starter, str(nsrv), os.path.join(PARACEL_INSTALL_PREFIX, 'bin/start_server --start_host'), hostname, ' --init_port', str(initport)]
     start_parasrv_cmd = ' '.join(start_parasrv_cmd_lst)
     logger.info(start_parasrv_cmd)
     procs = subprocess.Popen(start_parasrv_cmd, shell=True, preexec_fn=os.setpgrp)
